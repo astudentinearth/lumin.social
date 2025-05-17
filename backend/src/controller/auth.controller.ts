@@ -1,7 +1,9 @@
+import { userRepository } from "@/data/user-repository";
 import { loginDTO } from "@/dto/login-dto";
 import { Responses } from "@/responses";
 import { AuthService } from "@/service/auth.service";
 import { AuthRequest, Validated } from "@/types";
+import { UserDTO } from "@common/dto/user-dto";
 import { RequestHandler } from "express";
 
 const login: RequestHandler = async (
@@ -29,8 +31,18 @@ const login: RequestHandler = async (
   });
 };
 
-const getCurrentUser: RequestHandler = (req: AuthRequest, res) => {
-  if(req.session.userId) return Responses.Ok(res, {userId: req.session.userId});
+const getCurrentUser: RequestHandler = async (req: AuthRequest, res) => {
+  if(req.session.userId != null){
+    const id = req.session.userId;
+    const user = await userRepository.findById(id);
+    if(!user) return Responses.NotFound(res);
+    const dto = {
+      id: user.id,
+      join_date: user.join_date.toISOString(),
+      username: user.username
+    } satisfies UserDTO;
+     return Responses.Ok(res, {user: dto});
+  }
   else return Responses.Unauthorized(res);
 }
 

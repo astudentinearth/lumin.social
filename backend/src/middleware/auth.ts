@@ -12,15 +12,15 @@ export default session({
   cookie: {
     maxAge: ms("30d"),
     secure: process.env["NODE_ENV"] === "production",
-    sameSite: "lax"
+    sameSite: false,
+    httpOnly: true
   },
   saveUninitialized: false
 })
 
 export const protect: RequestHandler = (req: AuthRequest, res, next) => {
-  console.log(req.session)
   if(!req.session.userId) {
-    console.log("No session ID found")
+    console.log("Unauthorized")
     res.status(401).send();
     return;
   }

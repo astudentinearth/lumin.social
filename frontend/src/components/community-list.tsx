@@ -29,7 +29,7 @@ export function CommunityList({className}: {className?: string}){
         className
       )}
     >
-      {communities ? communities.map(community => <CommunityItem community={community}/>) : "Topluluklar yükleniyor..."}
+      {communities ? communities.map(community => <CommunityItem key={community.id} community={community}/>) : "Topluluklar yükleniyor..."}
     </div>
   );
 }
