@@ -7,6 +7,7 @@ export const postCommentRepository = {
   async create(comment: NewPostComment) {
     return await db.insert(postCommentTable).values(comment);
   },
+  /** Finds all comments for a post with their upvote counts. */
   async findByPostId(post_id: string) {
     return await db.select({
       id: postCommentTable.id,

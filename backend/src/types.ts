@@ -12,6 +12,7 @@ import {
 } from "./data/schema";
 import type { Request as ExpressRequest } from "express";
 import { SessionData } from "express-session";
+import {z} from "zod";
 
 export type User = typeof userTable.$inferSelect;
 export type NewUser = typeof userTable.$inferInsert;
@@ -55,7 +56,10 @@ declare module "express-session" {
 }
 
 export type Auth<T extends ExpressRequest> = T & {
-  session: SessionData;
+  session?: SessionData;
 }
 
 export type AuthRequest = Auth<ExpressRequest>;
+export type Validated<Schema extends z.ZodTypeAny, T extends ExpressRequest = ExpressRequest> = Omit<T, "body"> & {
+  body: z.infer<Schema>
+};

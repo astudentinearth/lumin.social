@@ -7,6 +7,7 @@ export const postRepository = {
   async create(post: NewPost) {
     return await db.insert(postTable).values(post);
   },
+  /** Finds posts from a user. Utilizes pagination and sorts them by creation date, new posts come first. */
   async findByUserId(
     user_id: string,
     pageable: Pageable = { page: 0, pageSize: 5 },
@@ -19,6 +20,7 @@ export const postRepository = {
       .limit(pageable.pageSize)
       .orderBy(desc(postTable.created_at));
   },
+  /** Finds posts from a community. Utilizes pagination and sorts them by creation date, new posts come first. */
   async findByCommunityId(
     community_id: string,
     pageable: Pageable = { page: 0, pageSize: 5 },
@@ -31,6 +33,7 @@ export const postRepository = {
       .limit(pageable.pageSize)
       .orderBy(desc(postTable.created_at));
   },
+  /** Finds posts that are independent of a community. Utilizes pagination and sorts them by creation date, new posts come first. */
   async findPersonalPosts(pageable: Pageable = { page: 0, pageSize: 5 }) {
     return await db
       .select()

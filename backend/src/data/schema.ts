@@ -9,7 +9,7 @@ export const userTable = pgTable("user", {
 
 
 export const sessionTable = pgTable("session", {
-  sid: varchar().notNull(),
+  sid: varchar().primaryKey(),
   sess: json().notNull(),
   expire: timestamp({withTimezone: true, mode: "date"})
 })
