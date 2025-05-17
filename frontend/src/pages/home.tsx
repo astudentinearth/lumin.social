@@ -1,7 +1,6 @@
-import { RootLayout } from "./layout";
 
 export function HomePage(){
-  return <RootLayout>
+  return <div>
     home page
-  </RootLayout>
+  </div>
 }

@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HomePage } from "./pages/home";
+import { RootLayout } from "./pages/layout";
 
 function App() {
   const [queryClient] = useState(new QueryClient());
@@ -11,8 +12,11 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route path="/">
+            <Route path="/" element={<RootLayout />}>
               <Route index element={<HomePage />} />
+              <Route path="/incidents" element={"bildirim panosu"} />
+              <Route path="/communities" element={"topluluklar"} />
+              <Route path="/wiki" element={"wiki"} />
             </Route>
           </Routes>
         </BrowserRouter>
