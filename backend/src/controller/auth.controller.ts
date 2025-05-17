@@ -46,7 +46,23 @@ const getCurrentUser: RequestHandler = async (req: AuthRequest, res) => {
   else return Responses.Unauthorized(res);
 }
 
+const getUserById: RequestHandler = async (req: AuthRequest, res) => {
+  const userId = req.query["user_id"];
+  if (!userId || typeof userId !== "string") {
+    return Responses.BadRequest(res);
+  }
+  const user = await userRepository.findById(userId);
+  if (!user) return Responses.NotFound(res);
+  const dto = {
+    id: user.id,
+    join_date: user.join_date.toISOString(),
+    username: user.username
+  } satisfies UserDTO;
+  return Responses.Ok(res, { user: dto });
+};
+
 export const AuthController = {
   login,
-  getCurrentUser
+  getCurrentUser,
+  getUserById
 };

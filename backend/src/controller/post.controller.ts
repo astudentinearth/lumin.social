@@ -23,7 +23,7 @@ async function getCommunityPosts(req: AuthRequest, res: Response) {
 async function getUpvotes(req: AuthRequest, res: Response) {
   const post_id = req.query["post_id"];
   if(!post_id || typeof post_id !== "string") return Responses.BadRequest(res);
-  return Responses.Ok(res, await PostService.getUpvotes(post_id));
+  return Responses.Ok(res, {count: (await PostService.getUpvotes(post_id)).at(0)?.count});
 }
 
 async function upvotePost(req: AuthRequest, res: Response) {

@@ -27,9 +27,16 @@ export async function createPost(data: NewPostDTO): Promise<Post> {
   return res.json();
 }
 
+export async function getUpvotes(post_id: string): Promise<{count: number}> {
+  const res = await Fetch.GET(`/post/get-upvotes?post_id=${encodeURIComponent(post_id)}`);
+  if (!res.ok) throw new Error("Failed to fetch upvotes");
+  return res.json();
+}
+
 export const PostService = {
   getPosts,
   getCommunityPosts,
   getAllPosts,
   createPost,
+  getUpvotes
 };

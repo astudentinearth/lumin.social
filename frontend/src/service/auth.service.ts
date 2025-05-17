@@ -1,3 +1,4 @@
+import { Fetch } from "@/lib/fetch";
 import { BASEURL } from "./baseurl";
 import { type UserDTO } from "@common/dto/user-dto";
 
@@ -21,7 +22,14 @@ async function login(username: string, password: string) {
   else return body as UserDTO;
 }
 
+async function getUserById(userId: string) {
+  const req = await Fetch.GET(`/auth/get-user-by-id?user_id=${encodeURIComponent(userId)}`);
+  if (req.status === 401) return undefined;
+  else return (await req.json()) as {user: UserDTO};
+}
+
 export const AuthService = {
   getCurrentUser,
   login,
+  getUserById
 };

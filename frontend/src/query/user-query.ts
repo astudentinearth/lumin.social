@@ -7,3 +7,10 @@ export const useCurrentUserQuery = ()=>{
     queryFn: AuthService.getCurrentUser
   })
 }
+
+export const useUserByIdQuery = (userId: string) => {
+  return useQuery({
+    queryKey: ["user", userId],
+    queryFn: () => AuthService.getUserById(userId)
+  })
+}

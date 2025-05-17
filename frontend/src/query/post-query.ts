@@ -15,3 +15,11 @@ export const useCommunityPostsQuery = (community_id: string) => {
     enabled: !!community_id,
   });
 }
+
+export const usePostUpvotesQuery = (post_id: string) => {
+  return useQuery({
+    queryKey: ["postUpvotes", post_id],
+    queryFn: () => PostService.getUpvotes(post_id),
+    enabled: !!post_id,
+  });
+}

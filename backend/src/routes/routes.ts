@@ -7,11 +7,15 @@ import { logger } from "@/middleware/access-log";
 import { protect } from "@/middleware/auth";
 import { validator } from "@/middleware/validator";
 import { Router } from "express";
+import { IncidentController } from "@/controller/incident.controller";
+import { incidentSchema } from "@/dto/incident-dto";
+import { newCommunitySchema } from "@/dto/new-community-dto";
 
 const communityRouter = Router().get(
   "/get-communities",
   CommunityController.getCommunities,
-);
+)
+.post("/create-community", protect, validator(newCommunitySchema), CommunityController.createCommunity);
 
 const postRouter = Router()
   .post(
@@ -30,10 +34,19 @@ const authRouter = Router().post(
   validator(loginDTO),
   AuthController.login,
 )
-.get("/get-user", protect, AuthController.getCurrentUser);
+.get("/get-user", protect, AuthController.getCurrentUser)
+.get("/get-user-by-id", AuthController.getUserById);
+
+const incidentRouter = Router()
+  .get("/get-incidents", IncidentController.getIncidents)
+  .post("/create-incident", protect, validator(incidentSchema), IncidentController.createIncident)
+  .get("/get-incident-by-id", IncidentController.getIncidentById)
+  
+
 
 export const router = Router()
   .use(logger)
   .use("/community", communityRouter)
   .use("/auth", authRouter)
-  .use("/post", postRouter);
+  .use("/post", postRouter)
+  .use("/incident", incidentRouter);
