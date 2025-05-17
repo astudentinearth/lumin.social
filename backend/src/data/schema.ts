@@ -1,4 +1,4 @@
-import { integer, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { integer, json, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 export const userTable = pgTable("user", {
   id: text().primaryKey(),
@@ -9,11 +9,9 @@ export const userTable = pgTable("user", {
 
 
 export const sessionTable = pgTable("session", {
-  id: text().primaryKey(),
-  user_id: text().references(()=>userTable.id).notNull(),
-  token_hash: text().notNull(),
-  expires_at: timestamp({withTimezone: true, mode: "date"}).notNull(),
-  created_at: timestamp({withTimezone: true, mode: "date"}).notNull()
+  sid: varchar().notNull(),
+  sess: json().notNull(),
+  expire: timestamp({withTimezone: true, mode: "date"})
 })
 
 export const incidentTable = pgTable("incident", {

@@ -10,6 +10,8 @@ import {
   profileTable,
   sessionTable,
 } from "./data/schema";
+import type { Request as ExpressRequest } from "express";
+import { SessionData } from "express-session";
 
 export type User = typeof userTable.$inferSelect;
 export type NewUser = typeof userTable.$inferInsert;
@@ -45,3 +47,15 @@ export type Pageable = {
   page: number,
   pageSize: number
 }
+
+declare module "express-session" {
+  interface SessionData {
+    userId?: string;
+  }
+}
+
+export type Auth<T extends ExpressRequest> = T & {
+  session: SessionData;
+}
+
+export type AuthRequest = Auth<ExpressRequest>;
