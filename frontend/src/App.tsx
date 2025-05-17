@@ -17,6 +17,9 @@ function App() {
               <Route path="/incidents" element={"bildirim panosu"} />
               <Route path="/communities" element={"topluluklar"} />
               <Route path="/wiki" element={"wiki"} />
+              <Route path="/incident/:id" element={"bildirim"} />
+              <Route path="/thread/:id" element={"gönderi"} />
+              <Route path="/l/:id" element={"topluluk"} />
             </Route>
           </Routes>
         </BrowserRouter>
