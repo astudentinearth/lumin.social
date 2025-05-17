@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { integer, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 export const userTable = pgTable("user", {
   id: text().primaryKey(),
@@ -6,6 +6,7 @@ export const userTable = pgTable("user", {
   password_hash: text().notNull(),
   join_date: timestamp({withTimezone: true, mode: "date"}).notNull()
 })
+
 
 export const sessionTable = pgTable("session", {
   id: text().primaryKey(),
@@ -41,6 +42,7 @@ export const communityTable = pgTable("community", {
   id: text().primaryKey(),
   creator_id: text().references(()=>userTable.id),
   name: varchar({length: 48}).notNull(),
+  description: text(),
   created_at: timestamp({withTimezone: true, mode: "date"}).notNull()
 })
 
@@ -49,7 +51,8 @@ export const postTable = pgTable("post", {
   community_id: text().references(()=>communityTable.id), // personal post if null
   title: varchar().notNull(),
   description: text(),
-  created_at: timestamp({withTimezone: true, mode: "date"}).notNull()
+  created_at: timestamp({withTimezone: true, mode: "date"}).notNull(),
+  user_id: text().references(()=>userTable.id).notNull()
 })
 
 
@@ -63,4 +66,20 @@ export const postCommentTable = pgTable("post_comment", {
 export const postVoteTable = pgTable("post_vote", {
   post_id: text().references(()=>postTable.id).notNull(),
   user_id: text().references(()=>userTable.id).notNull()
+})
+
+export const incidentCommentVoteTable = pgTable("incident_comment_upvote", {
+  comment_id: text().notNull().references(()=>incidentCommentTable.id),
+  user_id: text().references(()=>userTable.id).notNull()
+})
+
+export const postCommentUpvoteTable = pgTable("post_comment_upvote", {
+  comment_id: text().notNull().references(()=>postCommentTable.id),
+  user_id: text().references(()=>userTable.id).notNull()
+})
+
+export const profileTable = pgTable("profile", {
+  user_id: text().references(()=>userTable.id).primaryKey(),
+  communities: text().references(()=>communityTable.id).array().default([]),
+  age: integer()
 })

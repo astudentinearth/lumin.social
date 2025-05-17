@@ -1,0 +1,47 @@
+import {
+  userTable,
+  communityTable,
+  incidentCommentTable,
+  incidentTable,
+  incidentVoteTable,
+  postCommentTable,
+  postTable,
+  postVoteTable,
+  profileTable,
+  sessionTable,
+} from "./data/schema";
+
+export type User = typeof userTable.$inferSelect;
+export type NewUser = typeof userTable.$inferInsert;
+
+export type Community = typeof communityTable.$inferSelect;
+export type NewCommunity = typeof communityTable.$inferInsert;
+
+export type IncidentComment = typeof incidentCommentTable.$inferSelect;
+export type NewIncidentComment = typeof incidentCommentTable.$inferInsert;
+
+export type Incident = typeof incidentTable.$inferSelect;
+export type NewIncident = typeof incidentTable.$inferInsert;
+
+export type IncidentVote = typeof incidentVoteTable.$inferSelect;
+export type NewIncidentVote = typeof incidentVoteTable.$inferInsert;
+
+export type PostComment = typeof postCommentTable.$inferSelect;
+export type NewPostComment = typeof postCommentTable.$inferInsert;
+
+export type Post = typeof postTable.$inferSelect;
+export type NewPost = typeof postTable.$inferInsert;
+
+export type PostVote = typeof postVoteTable.$inferSelect;
+export type NewPostVote = typeof postVoteTable.$inferInsert;
+
+export type Profile = typeof profileTable.$inferSelect;
+export type NewProfile = typeof profileTable.$inferInsert;
+
+export type Session = typeof sessionTable.$inferSelect;
+export type NewSession = typeof sessionTable.$inferInsert;
+
+export type Pageable = {
+  page: number,
+  pageSize: number
+}
