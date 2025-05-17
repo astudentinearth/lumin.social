@@ -21,9 +21,12 @@ const login: RequestHandler = async (
   req.session.regenerate((err) => {
     if (err) next(err);
     req.session.userId = result.id;
-    req.session.save();
+    req.session.save(err => {
+      if(err) return next(err);
+      return Responses.Ok(res, { user: result });
+    });
+      
   });
-  return Responses.Ok(res, { user: result });
 };
 
 const getCurrentUser: RequestHandler = (req: AuthRequest, res) => {

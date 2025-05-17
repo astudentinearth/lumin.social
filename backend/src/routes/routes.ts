@@ -5,6 +5,7 @@ import { logger } from "@/middleware/access-log";
 import { protect } from "@/middleware/auth";
 import { validator } from "@/middleware/validator";
 import { Router } from "express";
+import session from "@/middleware/auth"
 
 const communityRouter = Router().get(
   "/get-communities",
@@ -19,6 +20,6 @@ const authRouter = Router().post(
 .get("/get-user", protect, AuthController.getCurrentUser);
 
 export const router = Router()
-  .use(logger)
+  .use(logger, session)
   .use("/community", communityRouter)
   .use("/auth", authRouter);

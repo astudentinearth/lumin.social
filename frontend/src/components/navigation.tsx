@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
-import { useEffect, useState, type ReactNode } from "react";
-import { Button } from "./ui/button";
 import { BookText, Flag, Home, Users } from "lucide-react";
+import { type ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from "./ui/button";
 
 function NavigationItem({
   icon,
