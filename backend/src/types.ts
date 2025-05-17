@@ -13,6 +13,7 @@ import {
 import type { Request as ExpressRequest } from "express";
 import { SessionData } from "express-session";
 import {z} from "zod";
+import { PostService } from "./service/post.service";
 
 export type User = typeof userTable.$inferSelect;
 export type NewUser = typeof userTable.$inferInsert;
@@ -62,4 +63,15 @@ export type Auth<T extends ExpressRequest> = T & {
 export type AuthRequest = Auth<ExpressRequest>;
 export type Validated<Schema extends z.ZodTypeAny, T extends ExpressRequest = ExpressRequest> = Omit<T, "body"> & {
   body: z.infer<Schema>
+};
+
+export type DetailedPost = {
+    id: string;
+    title: string;
+    description: string | null;
+    created_at: Date;
+    user_id: string;
+    username: string | null;
+    community_id: string | null;
+    community_name: string | null;
 };

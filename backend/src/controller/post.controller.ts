@@ -20,8 +20,24 @@ async function getCommunityPosts(req: AuthRequest, res: Response) {
   return Responses.Ok(res, await PostService.getCommunityPosts(community_id));
 }
 
+async function getUpvotes(req: AuthRequest, res: Response) {
+  const post_id = req.query["post_id"];
+  if(!post_id || typeof post_id !== "string") return Responses.BadRequest(res);
+  return Responses.Ok(res, await PostService.getUpvotes(post_id));
+}
+
+async function upvotePost(req: AuthRequest, res: Response) {
+  const post_id = req.query["post_id"];
+  if(!post_id || typeof post_id !== "string") return Responses.BadRequest(res);
+  if(req.session.userId == null) return Responses.Unauthorized(res);
+  await PostService.upvotePost(post_id, req.session.userId);
+  return Responses.Ok(res);
+}
+
 export const PostController = {
   createPost,
   getPosts,
-  getCommunityPosts
+  getCommunityPosts,
+  getUpvotes,
+  upvotePost
 }
