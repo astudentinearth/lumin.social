@@ -12,7 +12,10 @@ async function POST(route: string, body: unknown){
   const req = await fetch(`${BASEURL}${route}`, {
     credentials: "include",
     method: "POST",
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json"
+    }
   });
   return req;
 }

@@ -5,6 +5,7 @@ import { HomePage } from "./pages/home";
 import { RootLayout } from "./pages/layout";
 import { IncidentsPage } from "./pages/incidents";
 import { CommunitiesPage } from "./pages/communities";
+import { CommunityPage } from "./pages/community";
 
 function App() {
   const [queryClient] = useState(new QueryClient());
@@ -19,9 +20,9 @@ function App() {
               <Route path="/incidents" element={<IncidentsPage />} />
               <Route path="/communities" element={<CommunitiesPage />} />
               <Route path="/wiki" element={"wiki"} />
-              <Route path="/incident/:id" element={"bildirim"} />
-              <Route path="/thread/:id" element={"gönderi"} />
-              <Route path="/l/:id" element={"topluluk"} />
+              <Route path="/incident/:incidentId" element={"bildirim"} />
+              <Route path="/thread/:postId" element={"gönderi"} />
+              <Route path="/l/:communityId" element={<CommunityPage/>} />
             </Route>
           </Routes>
         </BrowserRouter>

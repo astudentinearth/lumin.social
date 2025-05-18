@@ -9,7 +9,7 @@ export const validator = <T extends z.ZodTypeAny>(schema: T)=>{
   return ((req, res, next)=>{
     const value = schema.safeParse(req.body);
     if(value.error) {
-      res.status(400).send({error: value.error.errors.map(e => e.message).join("\n")});
+      res.status(400).send({error: value.error.errors.map(e => `${e.path.join(".")} :${e.message}`).join("\n")});
       return;
     }
     else next();

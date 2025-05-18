@@ -10,8 +10,8 @@ export async function getPosts(): Promise<DetailedPost[]> {
 }
 
 // Retrieve posts by community ID
-export async function getCommunityPosts(community_id: string): Promise<Post[]> {
-  const res = await Fetch.GET(`/post/community?community_id=${encodeURIComponent(community_id)}`);
+export async function getCommunityPosts(community_id: string): Promise<DetailedPost[]> {
+  const res = await Fetch.GET(`/post/get-community-posts?community_id=${encodeURIComponent(community_id)}`);
   if (!res.ok) throw new Error("Failed to fetch community posts");
   return res.json();
 }

@@ -13,7 +13,7 @@ function CommunityItem({community}: {community: CommunityDTO}) {
       className={cn(
         "grid grid-rows-1 grid-cols-[20px_auto] gap-3 rounded-lg hover:bg-secondary/40 justify-start"
       )}
-      onClick={() => navigate(`/l/${community.name}`)}
+      onClick={() => navigate(`/l/${community.id}`)}
     >
       <Users size={20}/>
       {community.name}

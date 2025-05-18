@@ -5,7 +5,7 @@ import { Card } from "./ui/card";
 
 export default function IncidentCard({ incident }: { incident: IncidentDTO }) {
   const upvotesQuery = usePostUpvotesQuery(incident.id);
-  return <Card className="flex flex-col w-full p-4 gap-1.5 hover:brightness-120 transition-[filter] cursor-pointer">
+  return <Card className="flex flex-col bg-card/80 w-full p-4 gap-1.5 hover:brightness-120 transition-[filter,border] hover:border-red-400/20 cursor-pointer">
     <span className="text-muted-foreground text-xs">
       {[incident.username, new Date(incident.created_at).toLocaleString()].filter(x => !!x).join(" | ")}
     </span>

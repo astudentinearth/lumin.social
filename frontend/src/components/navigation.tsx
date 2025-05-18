@@ -21,7 +21,7 @@ function NavigationItem({
       variant={"ghost"}
       className={cn(
         "grid grid-rows-1 grid-cols-[20px_auto] gap-3 rounded-lg hover:bg-secondary/40 justify-start",
-        active && "bg-secondary",
+        active && "bg-secondary/80",
       )}
       onClick={() => navigate(route)}
     >
@@ -51,12 +51,12 @@ export function Navigation({ className }: { className?: string }) {
       />
       <NavigationItem
         icon={<Users size={20} />}
-        title="Topluluklar"
+        title="Destek toplulukları"
         route="/communities"
       />
       <NavigationItem
         icon={<BookText size={20} />}
-        title="Wiki"
+        title="El kitabı"
         route="/wiki"
       />
     </div>
