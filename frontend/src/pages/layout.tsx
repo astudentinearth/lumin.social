@@ -16,13 +16,15 @@ export function RootLayout() {
         location.pathname.startsWith("/incident") && "bg-red-300/8",
       )} >
         <Header />
-        <div className="flex gap-3 pl-3">
+        <div className="flex gap-3 pl-3 overflow-y-hidden">
           <div className="flex gap-3 flex-col">
             <SubmitButtons />
             <Navigation />
             <CommunityList />
           </div>
-          <Outlet />
+          <div className="overflow-y-scroll h-full max-h-full w-full">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>

@@ -8,8 +8,9 @@ export const usePostMutation = () => {
     mutationFn: (newPost: NewPostDTO) => {
       return PostService.createPost(newPost);
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.refetchQueries({ queryKey: ["posts"] });
+      queryClient.refetchQueries({ queryKey: ["communityPosts", data.community_id] });
     },
   });
 };

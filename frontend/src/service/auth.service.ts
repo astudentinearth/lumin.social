@@ -28,8 +28,13 @@ async function getUserById(userId: string) {
   else return (await req.json()) as {user: UserDTO};
 }
 
+async function logout() {
+  await Fetch.POST("/auth/logout", {});
+}
+
 export const AuthService = {
   getCurrentUser,
   login,
-  getUserById
+  getUserById,
+  logout
 };

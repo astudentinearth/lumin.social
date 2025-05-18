@@ -35,7 +35,8 @@ const authRouter = Router().post(
   AuthController.login,
 )
 .get("/get-user", protect, AuthController.getCurrentUser)
-.get("/get-user-by-id", AuthController.getUserById);
+.get("/get-user-by-id", AuthController.getUserById)
+.post("/logout", protect, AuthController.logout);
 
 const incidentRouter = Router()
   .get("/get-incidents", IncidentController.getIncidents)

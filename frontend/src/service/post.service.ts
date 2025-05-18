@@ -33,10 +33,16 @@ export async function getUpvotes(post_id: string): Promise<{count: number}> {
   return res.json();
 }
 
+export async function upvote(post_id: string) {
+  const res = await Fetch.POST(`/post/upvote-post?post_id=${encodeURIComponent(post_id)}`, {});
+  return await res.json();
+}
+
 export const PostService = {
   getPosts,
   getCommunityPosts,
   getAllPosts,
   createPost,
-  getUpvotes
+  getUpvotes,
+  upvote
 };

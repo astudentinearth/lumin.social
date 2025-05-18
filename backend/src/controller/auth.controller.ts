@@ -61,8 +61,17 @@ const getUserById: RequestHandler = async (req: AuthRequest, res) => {
   return Responses.Ok(res, { user: dto });
 };
 
+const logout: RequestHandler = async (req: AuthRequest, res) => {
+  req.session.userId = undefined;
+  req.session.save(err => {
+    if(err) return res.sendStatus(500);
+    return Responses.Ok(res, {message: "Logged out"});
+  })
+}
+
 export const AuthController = {
   login,
   getCurrentUser,
-  getUserById
+  getUserById,
+  logout
 };
