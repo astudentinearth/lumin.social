@@ -22,7 +22,7 @@ export function RootLayout() {
             <Navigation />
             <CommunityList />
           </div>
-          <div className="overflow-y-scroll h-full max-h-full w-full">
+          <div className="h-full max-h-full w-full">
             <Outlet />
           </div>
         </div>

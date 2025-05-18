@@ -12,11 +12,22 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
+import { useIncidentMutation } from "@/query/incident-mutation";
 
 export function IncidentDialog() {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [tags, setTags] = useState<string>("");
+  const mutation = useIncidentMutation();
+  const submit = () => {
+    mutation.mutate({
+      title,
+      description: content,
+      tags,
+    });
+    setTitle("");
+    setContent("");
+  };
   return (
     <Dialog>
       <DialogTrigger>
@@ -42,8 +53,8 @@ export function IncidentDialog() {
             onChange={(e) => setContent(e.target.value)}
           />
           <Label>{"Etiket ekleyebilirsiniz (virgül ile ayırın):"}</Label>
-          <Input value={tags} onChange={e => setTags(e.target.value)}></Input>
-          <DialogClose className="bg-secondary hover:bg-primary transition-colors text-primary-foreground p-2 rounded-lg px-4">
+          <Input value={tags} onChange={(e) => setTags(e.target.value)}></Input>
+          <DialogClose onClick={submit} className="bg-secondary hover:bg-primary transition-colors text-primary-foreground p-2 rounded-lg px-4">
             Gönder
           </DialogClose>
         </div>
