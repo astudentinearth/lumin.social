@@ -2,9 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/main.js",
+  "main": "dist/main.mjs",
   "scripts": {
-    "dev": "tsx --watch ./src/main.ts"
+    "dev": "tsx --watch ./src/main.ts",
+    "start": "node ./dist/main.mjs"
   },
   "keywords": [],
   "author": "",
@@ -33,6 +34,7 @@
     "@types/node": "^22.15.18",
     "@types/pg": "^8.15.2",
     "drizzle-kit": "^0.31.1",
+    "tsup": "^8.5.0",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   }

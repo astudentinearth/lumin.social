@@ -30,6 +30,8 @@ export function PostDialog() {
       description: content,
       community_id: communityId,
     });
+    setTitle("");
+    setContent("");
   };
   return (
     <Dialog>

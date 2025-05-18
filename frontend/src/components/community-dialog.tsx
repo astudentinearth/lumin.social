@@ -23,6 +23,8 @@ export function CommunityDialog() {
       name: title,
       description: content,
     });
+    setTitle("");
+    setContent("");
   };
   return (
     <Dialog>
