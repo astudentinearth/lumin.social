@@ -1,6 +1,6 @@
 export function WikiPage() {
   return (
-    <div className="w-full grid-cols-4 grid-rows-2 grid gap-3 [&>div]:hover:border-primary/50 [&>div]:transition-colors">
+    <div className="w-full grid-cols-4 grid-rows-2 grid gap-3 pr-2 [&>div]:hover:border-primary/50 [&>div]:transition-colors">
       <div className="col-span-2 bg-card rounded-2xl w-full h-full border p-4">
         <h1 className="text-3xl font-bold">{"Haklarını tanı"}</h1>
         <p className="text-muted-foreground">
