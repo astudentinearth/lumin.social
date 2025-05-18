@@ -11,6 +11,7 @@ export const useCurrentUserQuery = ()=>{
 export const useUserByIdQuery = (userId: string) => {
   return useQuery({
     queryKey: ["user", userId],
-    queryFn: () => AuthService.getUserById(userId)
+    queryFn: () => AuthService.getUserById(userId),
+    enabled: !!userId,
   })
 }

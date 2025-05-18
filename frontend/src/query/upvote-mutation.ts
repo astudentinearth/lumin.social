@@ -7,8 +7,8 @@ export const usePostUpvoteMutation = () => {
     mutationFn: (post_id: string) => {
       return PostService.upvote(post_id);
     },
-    onMutate: (variables) => {
-      queryClient.refetchQueries({queryKey: ["postUpvotes", variables]})
+    onSettled: (_data, post_id) => {
+      queryClient.invalidateQueries({queryKey: ["postUpvotes", post_id]})
     },
   });
 }

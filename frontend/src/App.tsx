@@ -6,6 +6,8 @@ import { RootLayout } from "./pages/layout";
 import { IncidentsPage } from "./pages/incidents";
 import { CommunitiesPage } from "./pages/communities";
 import { CommunityPage } from "./pages/community";
+import { PostPage } from "./pages/post";
+import { IncidentPage } from "./pages/incident";
 
 function App() {
   const [queryClient] = useState(new QueryClient());
@@ -20,8 +22,8 @@ function App() {
               <Route path="/incidents" element={<IncidentsPage />} />
               <Route path="/communities" element={<CommunitiesPage />} />
               <Route path="/wiki" element={"wiki"} />
-              <Route path="/incident/:incidentId" element={"bildirim"} />
-              <Route path="/thread/:postId" element={"gönderi"} />
+              <Route path="/incident/:incidentId" element={<IncidentPage/>} />
+              <Route path="/post/:postId" element={<PostPage/>} />
               <Route path="/l/:communityId" element={<CommunityPage/>} />
             </Route>
           </Routes>

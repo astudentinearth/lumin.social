@@ -16,7 +16,7 @@ export function AccountPopover({className}: {className?: string}){
     <PopoverTrigger className={cn("flex justify-center items-center gap-2", className)}>
       {userQuery.data?.user.username ?? "Giriş yap"} <ChevronDown size={20}/>
     </PopoverTrigger>
-    <PopoverContent>
+    <PopoverContent className="mr-4 rounded-2xl">
       {userQuery.data ? <div className="flex flex-col gap-2">
         <span>{`${userQuery.data.user.username} olarak giriş yapıldı.`}</span>
         <Button disabled={logout.isPending} onClick={handleLogout} variant={"secondary"} className="gap-2">

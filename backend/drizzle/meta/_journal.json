@@ -15,6 +15,13 @@
       "when": 1747503255264,
       "tag": "0001_curious_toxin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1747532508487,
+      "tag": "0002_amazing_silk_fever",
+      "breakpoints": true
     }
   ]
 }

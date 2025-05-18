@@ -58,7 +58,8 @@ export const postCommentTable = pgTable("post_comment", {
   id: text().primaryKey(),
   post_id: text().references(()=>postTable.id).notNull(),
   content: text().notNull(),
-  created_at: timestamp({withTimezone: true, mode: "date"})
+  created_at: timestamp({withTimezone: true, mode: "date"}),
+  user_id: text().references(()=>userTable.id).notNull()
 })
 
 export const postVoteTable = pgTable("post_vote", {

@@ -10,6 +10,7 @@ import { Router } from "express";
 import { IncidentController } from "@/controller/incident.controller";
 import { incidentSchema } from "@/dto/incident-dto";
 import { newCommunitySchema } from "@/dto/new-community-dto";
+import { CommentController } from "@/controller/comment.controller";
 
 const communityRouter = Router().get(
   "/get-communities",
@@ -42,12 +43,17 @@ const incidentRouter = Router()
   .get("/get-incidents", IncidentController.getIncidents)
   .post("/create-incident", protect, validator(incidentSchema), IncidentController.createIncident)
   .get("/get-incident-by-id", IncidentController.getIncidentById)
-  
 
+const commentRouter = Router()
+  .post("/create-post-comment", protect, CommentController.createPostComment)
+  .get("/get-post-comments", CommentController.getPostComments)
+  .post("/create-incident-comment", protect, CommentController.createIncidentComment)
+  .get("/get-incident-comments", CommentController.getIncidentComments);
 
 export const router = Router()
   .use(logger)
   .use("/community", communityRouter)
   .use("/auth", authRouter)
   .use("/post", postRouter)
-  .use("/incident", incidentRouter);
+  .use("/incident", incidentRouter)
+  .use("/comment", commentRouter);

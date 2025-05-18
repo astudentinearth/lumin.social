@@ -2,10 +2,15 @@ import { usePostUpvotesQuery } from "@/query/post-query";
 import type { IncidentDTO } from "@common/dto/incident-dto";
 import { ChevronUp } from "lucide-react";
 import { Card } from "./ui/card";
+import { useNavigate } from "react-router-dom";
 
 export default function IncidentCard({ incident }: { incident: IncidentDTO }) {
   const upvotesQuery = usePostUpvotesQuery(incident.id);
-  return <Card className="flex flex-col bg-card/80 w-full p-4 gap-1.5 hover:brightness-120 transition-[filter,border] hover:border-red-400/20 cursor-pointer">
+  const nav = useNavigate();
+  const goToIncident = () => {
+    nav(`/incident/${incident.id}`);
+  }
+  return <Card onClick={goToIncident} className="flex flex-col bg-card/80 w-full p-4 gap-1.5 hover:brightness-120 transition-[filter,border] hover:border-red-400/20 cursor-pointer">
     <span className="text-muted-foreground text-xs">
       {[incident.username, new Date(incident.created_at).toLocaleString()].filter(x => !!x).join(" | ")}
     </span>
